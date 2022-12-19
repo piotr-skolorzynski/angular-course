@@ -9,17 +9,9 @@
 >
   Add server
 </button>
-<p>{{ serverCreationStatus }}</p>
+<!-- <p>{{ serverCreationStatus }}</p> -->
+<p *ngIf="serverCreated">
+  Server was created, server name is {{ serverCreationStatus }}
+</p>
 <app-server></app-server>
 <app-server></app-server>
-
-<label>
-  Username
-  <input type="text" [(ngModel)]="userName" />
-</label>
-
-<p>{{ userName }}</p>
-
-<button (click)="onUserNameReset()" [disabled]="userName === ''">
-  Reset user name
-</button>

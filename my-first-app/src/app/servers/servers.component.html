@@ -12,3 +12,14 @@
 <p>{{ serverCreationStatus }}</p>
 <app-server></app-server>
 <app-server></app-server>
+
+<label>
+  Username
+  <input type="text" [(ngModel)]="userName" />
+</label>
+
+<p>{{ userName }}</p>
+
+<button (click)="onUserNameReset()" [disabled]="userName === ''">
+  Reset user name
+</button>

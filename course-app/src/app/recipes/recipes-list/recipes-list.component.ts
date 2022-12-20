@@ -11,7 +11,7 @@ export class RecipesListComponent {
     new Recipe(
       'A test recipe',
       'This is simply a test',
-      'https://www.istockphoto.com/photo/gingerbread-christmas-tree-on-dark-table-christmas-card-gm1355540092-430001551?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fchrismas-cake&utm_term=chrismas%20cake%3A%3A%3A'
+      'https://food-images.files.bbci.co.uk/food/recipes/classic_christmas_cake_04076_16x9.jpg'
     ),
   ];
 }

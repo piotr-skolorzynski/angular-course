@@ -20,3 +20,16 @@
   <p>No server was created!</p>
 </ng-template>
 <app-server *ngFor="let server of servers"></app-server>
+
+<button class="btn btn-primary" (click)="togglePasswordDisplay()">
+  Display Details
+</button>
+<p *ngIf="isSecretPasswordHidden">Secret Password = tuna</p>
+
+<div
+  *ngFor="let toggleItem of togglesArray"
+  [ngStyle]="{ backgroundColor: toggleItem > 4 ? 'blue' : 'inherit' }"
+  [ngClass]="{ text: toggleItem > 4 }"
+>
+  {{ toggleItem }}
+</div>

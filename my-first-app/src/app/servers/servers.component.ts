@@ -11,9 +11,18 @@ export class ServersComponent {
   serverName = 'Testserver';
   serverCreated = false;
   servers = ['Test server', 'Test server 2'];
+  isSecretPasswordHidden = true;
+  toggleNumber = 0;
+  togglesArray = [];
 
   constructor() {
     setTimeout(() => (this.allowNewServer = true), 2000);
+  }
+
+  togglePasswordDisplay() {
+    this.isSecretPasswordHidden = !this.isSecretPasswordHidden;
+    this.toggleNumber += 1;
+    this.togglesArray.push(this.toggleNumber);
   }
 
   onCreateServer() {

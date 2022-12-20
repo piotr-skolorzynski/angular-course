@@ -1,3 +1,11 @@
 label {
   margin-right: 10px;
 }
+
+.hide {
+  display: none;
+}
+
+.text {
+  color: white;
+}

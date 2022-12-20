@@ -27,9 +27,9 @@
 <p *ngIf="isSecretPasswordHidden">Secret Password = tuna</p>
 
 <div
-  *ngFor="let toggleItem of togglesArray"
-  [ngStyle]="{ backgroundColor: toggleItem > 4 ? 'blue' : 'inherit' }"
-  [ngClass]="{ text: toggleItem > 4 }"
+  *ngFor="let toggleItem of togglesArray; let i = index"
+  [ngStyle]="{ backgroundColor: i > 4 ? 'blue' : 'inherit' }"
+  [ngClass]="{ text: i > 4 }"
 >
   {{ toggleItem }}
 </div>

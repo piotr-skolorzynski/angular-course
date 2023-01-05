@@ -13,7 +13,6 @@ export class ShoppingListComponent {
   ];
 
   onIngredientAdded(ingredient: Ingredient) {
-    event.preventDefault();
     this.ingredients.push(ingredient);
   }
 }

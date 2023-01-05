@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  oddNumbers: number[] = [];
+  evenNumbers: number[] = [];
+
   serverElements = [
     { type: 'server', name: 'TestServer', content: 'Just a test' },
   ];
@@ -27,5 +30,13 @@ export class AppComponent {
       name: blueprintData.serverName,
       content: blueprintData.serverContent,
     });
+  }
+
+  onIntervalFired(number: number) {
+    if (number % 2 === 0) {
+      return this.evenNumbers.push(number);
+    }
+
+    return this.oddNumbers.push(number);
   }
 }

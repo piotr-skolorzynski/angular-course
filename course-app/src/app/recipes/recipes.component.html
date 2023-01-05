@@ -5,6 +5,9 @@
     ></app-recipes-list>
   </div>
   <div class="col-md-7">
-    <app-recipes-detail [recipe]="selectedRecipe"></app-recipes-detail>
+    <app-recipes-detail
+      *ngIf="selectedRecipe"
+      [recipe]="selectedRecipe"
+    ></app-recipes-detail>
   </div>
 </div>

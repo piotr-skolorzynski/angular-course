@@ -10,6 +10,7 @@ export class RecipesComponent {
   selectedRecipe: Recipe;
 
   onRecivingSelectedRecipe(recipe: Recipe) {
+    console.log(recipe);
     this.selectedRecipe = recipe;
   }
 }

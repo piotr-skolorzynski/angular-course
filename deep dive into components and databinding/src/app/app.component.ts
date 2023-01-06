@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   oddNumbers: number[] = [];
   evenNumbers: number[] = [];
+  value = 10;
 
   serverElements = [
     { type: 'server', name: 'TestServer', content: 'Just a test' },

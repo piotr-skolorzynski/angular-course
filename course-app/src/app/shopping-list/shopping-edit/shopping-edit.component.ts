@@ -15,7 +15,7 @@ export class ShoppingEditComponent {
 
   onAddItem() {
     const newIngredient = new Ingredient(
-      this.amountInputRef.nativeElement.value,
+      this.nameInputRef.nativeElement.value,
       this.amountInputRef.nativeElement.value
     );
     this.shoppingListService.addIngredient(newIngredient);

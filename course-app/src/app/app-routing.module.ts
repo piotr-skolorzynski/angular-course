@@ -12,7 +12,10 @@ const routes: Routes = [
     component: RecipesComponent,
     children: [
       { path: '', component: RecipeStartComponent },
-      { path: ':id', component: RecipesDetailComponent },
+      {
+        path: ':id',
+        component: RecipesDetailComponent,
+      },
     ],
   },
   { path: 'shopping-list', component: ShoppingListComponent },

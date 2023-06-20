@@ -8,8 +8,8 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
   defaultQuestion = 'teacher';
-
   answer = '';
+  genders = ['male', 'female'];
 
   suggestUserName() {
     const suggestedName = 'Superuser';

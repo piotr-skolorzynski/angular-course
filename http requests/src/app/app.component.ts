@@ -10,6 +10,8 @@ import { Post } from './post.model';
 })
 export class AppComponent implements OnInit {
   loadedPosts = [];
+  isFetching = false;
+
   private postsURL =
     'https://ng-complete-guide-2d4c2-default-rtdb.europe-west1.firebasedatabase.app/posts.json';
 
@@ -36,6 +38,7 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
+    this.isFetching = true;
     this.http
       .get<{ [key: string]: Post }>(this.postsURL)
       .pipe(
@@ -55,6 +58,7 @@ export class AppComponent implements OnInit {
         })
       )
       .subscribe((posts) => {
+        this.isFetching = false;
         this.loadedPosts = posts;
       });
   }

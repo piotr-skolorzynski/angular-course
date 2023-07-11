@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Post } from './post.model';
 import { catchError, map } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
@@ -32,7 +32,13 @@ export class PostsService {
     //to co zwracamy jest observable więc w komponencie trzeba się zasubskrybować
     return this.http
       .get<{ [key: string]: Post }>(
-        'https://ng-complete-guide-2d4c2-default-rtdb.europe-west1.firebasedatabase.app/posts.json'
+        'https://ng-complete-guide-2d4c2-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
+        {
+          //w ten sposób można rozpisać dowolne nagłówki
+          headers: new HttpHeaders({
+            'Custom-Header': 'Hello',
+          }),
+        }
       )
       .pipe(
         map((responseData) => {

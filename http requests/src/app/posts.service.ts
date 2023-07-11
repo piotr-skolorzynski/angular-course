@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Post } from './post.model';
 import { catchError, map } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
@@ -29,7 +29,10 @@ export class PostsService {
   }
 
   fetchPosts() {
-    //to co zwracamy jest observable więc w komponencie trzeba się zasubskrybować
+    let searchParams = new HttpParams();
+    searchParams = searchParams.append('print', 'pretty');
+    searchParams = searchParams.append('custom', 'key');
+
     return this.http
       .get<{ [key: string]: Post }>(
         'https://ng-complete-guide-2d4c2-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
@@ -38,6 +41,7 @@ export class PostsService {
           headers: new HttpHeaders({
             'Custom-Header': 'Hello',
           }),
+          params: searchParams,
         }
       )
       .pipe(

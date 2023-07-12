@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+  HttpEventType,
+} from '@angular/common/http';
 import { Post } from './post.model';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
 
 //można też klasycznie zarejestrować w app.module providers
@@ -16,7 +21,12 @@ export class PostsService {
     this.http
       .post<{ name: string }>(
         'https://ng-complete-guide-2d4c2-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
-        postData
+        postData,
+        //w obiekcie konfiguracyjnym można ustawić nie tylko headers czy params ale
+        //także co httpClient ma observować, domyślnie jest to body, inne to np. response
+        {
+          observe: 'response',
+        }
       )
       .subscribe(
         (responseData) => {
@@ -69,8 +79,21 @@ export class PostsService {
   }
 
   deletePosts() {
-    return this.http.delete(
-      'https://ng-complete-guide-2d4c2-default-rtdb.europe-west1.firebasedatabase.app/posts.json'
-    );
+    return this.http
+      .delete(
+        'https://ng-complete-guide-2d4c2-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
+        {
+          //można nakazać nasłuchiwać zamiast na body albo response również na events
+          observe: 'events',
+        }
+      )
+      .pipe(
+        tap((event) => {
+          console.log(event); //zwraca obiekt {type:0} jest to wartość enum HttpEventType.Sent
+          if (event.type === HttpEventType.Sent) {
+            //do sth in UI etc.
+          }
+        })
+      );
   }
 }

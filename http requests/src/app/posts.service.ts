@@ -85,6 +85,7 @@ export class PostsService {
         {
           //można nakazać nasłuchiwać zamiast na body albo response również na events
           observe: 'events',
+          responseType: 'text',
         }
       )
       .pipe(

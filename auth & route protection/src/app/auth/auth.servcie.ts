@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { catchError } from "rxjs/operators";
+import { throwError } from "rxjs";
 
-//dane zwracane przez firebase
 interface AuthResponseData {
   kind: string;
   idToken: string;
@@ -16,10 +17,24 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   signup(email: string, password: string) {
-    return this.http.post<AuthResponseData>(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyAosLQqnEdW8H5k4v8GzzWMVavpTsSSGII",
-      //dane wymagane do uwierzytelnienia w firebase poprzez hasło i email
-      { email, password, returnSecureToken: true }
-    );
+    return this.http
+      .post<AuthResponseData>(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyAosLQqnEdW8H5k4v8GzzWMVavpTsSSGII",
+        { email, password, returnSecureToken: true }
+      )
+      .pipe(
+        catchError((errorRes) => {
+          let errorMessage = "An unknown error occured!";
+          if (!errorRes.error || !errorRes.error.error) {
+            return throwError(errorMessage);
+          }
+          switch (errorRes.error.error.message) {
+            case "EMAIL_EXISTS":
+              errorMessage = "This email already exists";
+          }
+
+          return throwError(errorMessage);
+        })
+      );
   }
 }

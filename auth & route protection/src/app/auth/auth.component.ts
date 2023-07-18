@@ -7,12 +7,14 @@ import { AuthService } from "./auth.servcie";
   templateUrl: "./auth.component.html",
 })
 export class AuthComponent {
-  isLogginngMode = true;
+  isLogginMode = true;
+  isLoading = false;
+  error: string = null;
 
   constructor(private authService: AuthService) {}
 
   onSwitchMode() {
-    this.isLogginngMode = !this.isLogginngMode;
+    this.isLogginMode = !this.isLogginMode;
   }
 
   onSubmit(form: NgForm) {
@@ -20,16 +22,20 @@ export class AuthComponent {
       return;
     }
 
-    if (this.isLogginngMode) {
+    this.isLoading = true;
+    if (this.isLogginMode) {
       return;
     }
 
     this.authService.signup(form.value.email, form.value.password).subscribe(
       (responseData) => {
         console.log(responseData);
+        this.isLoading = false;
       },
-      (error) => {
-        console.log(error);
+      (errorMessage: string) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+        this.isLoading = false;
       }
     );
     form.reset();

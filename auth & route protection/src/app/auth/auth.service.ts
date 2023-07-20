@@ -49,6 +49,31 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+  autoLogin() {
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem("userData"));
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    //tutaj korzystamy z gettera klasy User dla tokena więc jeśli wygasł
+    //to getter zwróci nam null
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+    }
+  }
+
   logout() {
     this.user.next(null);
     this.router.navigate(["/auth"]);
@@ -64,8 +89,8 @@ export class AuthService {
       new Date().getTime() + Number(expiresIn) * 1000
     );
     const user = new User(email, userId, token, expirationDate);
-    //this emits user as new user in this app
     this.user.next(user);
+    localStorage.setItem("userData", JSON.stringify(user));
   }
 
   private handleError(errorRes: HttpErrorResponse) {

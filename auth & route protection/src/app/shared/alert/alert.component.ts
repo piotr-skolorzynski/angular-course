@@ -1,4 +1,5 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output } from "@angular/core";
+import { EventEmitter } from "protractor";
 
 @Component({
   selector: "app-alert",
@@ -7,4 +8,9 @@ import { Component, Input } from "@angular/core";
 })
 export class AlertComponent {
   @Input() message: string;
+  @Output() close = new EventEmitter<void>();
+
+  onClose() {
+    this.close.emit();
+  }
 }

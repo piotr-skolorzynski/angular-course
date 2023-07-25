@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal, effect } from '@angular/core';
 
 @Component({
   selector: 'app-signals',
@@ -10,6 +10,11 @@ import { Component, signal } from '@angular/core';
 export class SignalsComponent {
   actions = signal<string[]>([]);
   counter = signal(0);
+  doubleCounter = computed(() => this.counter() * 2);
+
+  constructor() {
+    effect(() => console.log(this.counter()));
+  }
 
   increment() {
     this.counter.update((oldCounter) => (oldCounter += 1));
@@ -19,7 +24,5 @@ export class SignalsComponent {
   decrement() {
     this.counter.update((oldCounter) => (oldCounter -= 1));
     this.actions.mutate((oldActions) => oldActions.push('DECREMENT'));
-    //alternatywnie zastępowanie nową tablicą poprzez update
-    // this.actions.update((oldActions) => [...oldActions, 'DECREMENT']);
   }
 }

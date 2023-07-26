@@ -16,7 +16,6 @@ import { counterReducer } from './store/counter.reducer';
   imports: [
     BrowserModule,
     StoreModule.forRoot({
-      //nazwa klucza dla reducera pod którą chcemy go używać
       counter: counterReducer,
     }),
   ],

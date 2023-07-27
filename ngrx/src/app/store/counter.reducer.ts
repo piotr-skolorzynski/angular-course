@@ -1,22 +1,12 @@
-import { Action } from '@ngrx/store';
-import { CounterActions, IncrementAction } from './counter.actions';
+import { createReducer, on } from '@ngrx/store';
+import { decrement, increment } from './counter.actions';
 
 const initialState = 0;
-
-// export const counterReducer = createReducer(
-//   initialState,
-//   on(increment, (state, action) => state + action.value)
-// );
-
 export const INCREMENT = '[Counter] Increment';
+export const DECREMENT = '[Counter] Decrement';
 
-//typ action jest dodany ze względu na to że jest useStrict: true
-export function counterReducer(
-  state = initialState,
-  action: CounterActions | Action
-) {
-  if (action.type === INCREMENT) {
-    return state + (action as IncrementAction).value;
-  }
-  return state;
-}
+export const counterReducer = createReducer(
+  initialState,
+  on(increment, (state, action) => state + action.value),
+  on(decrement, (state, action) => state - action.value)
+);

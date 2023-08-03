@@ -27,6 +27,15 @@ export class AppComponent {
   list = ["Milk", "Sugar", "Bread"];
   state = "normal";
 
+  onAnimate() {
+    if (this.state === "normal") {
+      this.state = "highlighted";
+      return;
+    }
+
+    this.state = "normal";
+  }
+
   onAdd(item) {
     this.list.push(item);
   }

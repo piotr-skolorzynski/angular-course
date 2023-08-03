@@ -16,18 +16,28 @@ import { Component } from "@angular/core";
         "normal",
         style({
           backgroundColor: "red",
-          transform: "translateX(0)",
+          transform: "translateX(0) scale(1)",
         })
       ),
       state(
         "highlighted",
         style({
           backgroundColor: "blue",
-          transform: "translateX(100px)",
+          transform: "translateX(100px) scale(1)",
         })
       ),
-      transition("normal => highlighted", animate(300)),
-      transition("highlighted => normal", animate(800)),
+      state(
+        "shrunken",
+        style({
+          backgroundColor: "green",
+          transform: "translateX(0) scale(0.5)",
+        })
+      ),
+      //dla obu kierunków
+      // transition("normal <=> highlighted", animate(300)),
+      transition("normal => highlighted", animate(800)),
+      //* oznacza dowolny stan
+      transition("shrunken <=> *", animate(500)),
     ]),
   ],
 })

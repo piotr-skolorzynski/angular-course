@@ -17,7 +17,7 @@ const routes: Route[] = [
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('../dashboard/routes').then((mod) => mod.DASHBOARD_ROUTES),
+      import('./dashboard/routes').then((mod) => mod.DASHBOARD_ROUTES),
   },
 ];
 

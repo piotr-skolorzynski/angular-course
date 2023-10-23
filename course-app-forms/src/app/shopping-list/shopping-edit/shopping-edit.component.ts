@@ -38,7 +38,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.addItemForm.valid) {
       const productName = this.addItemForm.value.productName;
       const productAmount = this.addItemForm.value.productAmount;
@@ -54,7 +54,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  resetForm() {
+  resetForm(): void {
     this.editMode = false;
     this.addItemForm.reset();
   }

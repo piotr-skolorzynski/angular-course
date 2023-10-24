@@ -29,6 +29,7 @@ export class RecipeEditComponent implements OnInit {
 
   onSubmit() {
     if (this.recipeForm.valid) {
+      console.log(this.recipeForm.value);
       if (this.editMode) {
         this.recipeService.updateRecipe(this.id, this.recipeForm.value);
       } else {
@@ -56,6 +57,10 @@ export class RecipeEditComponent implements OnInit {
         ]),
       })
     );
+  }
+
+  onDeleteIngredient(index: number) {
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
   private initForm() {
